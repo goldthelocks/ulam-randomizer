@@ -1,0 +1,30 @@
+version: '2.2'
+
+services:
+  ulam:
+    image: goldthelocks/ulam-randomizer
+    container_name: ulam
+    ports:
+      - "9999:9999"
+    env_file:
+      - ./env/app.env
+    depends_on:
+      db:
+        condition: service_healthy
+    links:
+      - db
+
+  db:
+    image: postgres
+    container_name: db
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=ulam
+      - POSTGRES_DB=ulam
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5

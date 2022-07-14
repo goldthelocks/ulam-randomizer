@@ -1,0 +1,11 @@
+version: '2.1'
+
+services:
+  build:
+    image: maven:3.8.6-amazoncorretto-11
+    volumes:
+      - .:/build
+      - ./dist:/build/dist
+      - $HOME/.m2:/root/.m2
+    working_dir: /build
+    command: /build/auto/build.sh

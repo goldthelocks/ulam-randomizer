@@ -1,0 +1,12 @@
+server:
+  port: 9999
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://db:5432/ulam
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
